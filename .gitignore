@@ -18,9 +18,15 @@ mono_crash.*
 !.vscode/launch.json
 !.vscode/extensions.json
 .vs/*
+
+# Ignore build output directories
+bin/
+obj/
+bin/Debug/net8.0/
 VR/bin*
 VR/obj*
 VR.Tests/bin*
 VR.Tests/obj*
 DataGenerator/bin*
 DataGenerator/obj*
+VR/bin/Debug/net8.0
