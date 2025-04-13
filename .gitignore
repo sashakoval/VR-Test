@@ -18,15 +18,9 @@ mono_crash.*
 !.vscode/launch.json
 !.vscode/extensions.json
 .vs/*
-
-# User-specific files (JetBrains Rider)
-.idea/*
-.idea/**/*
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/**/usage.statistics.xml
-.idea/**/dictionaries
-.idea/**/shelf
-.idea/**/contentModel.xml
-.idea/**/modules.xml
-.idea/**/vcs.xml
+VR/bin*
+VR/obj*
+VR.Tests/bin*
+VR.Tests/obj*
+DataGenerator/bin*
+DataGenerator/obj*

@@ -2,6 +2,9 @@
 
 namespace VR.Services
 {
+    /// <summary>
+    /// Service to validate the contents of the file being parsed.
+    /// </summary>
     public class ValidationService : IValidationService
     {
         /// <summary>

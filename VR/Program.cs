@@ -12,16 +12,20 @@ IHost host = Host.CreateDefaultBuilder(args)
     })
     .ConfigureServices((context, services) =>
     {
+        // Configure FileMonitorOptions
         services.Configure<FileMonitorOptions>(context.Configuration.GetSection("FileMonitorOptions"));
 
+        // Configure DbContext with PostgreSQL
         services.AddDbContext<VRDbContext>(options =>
             options.UseNpgsql(context.Configuration.GetConnectionString("PostgreSQLConnectionStrings")));
 
+        // Register services
         services.AddScoped<IFileMonitorService, FileMonitorService>();
         services.AddScoped<IFileParserService, FileParserService>();
         services.AddScoped<IDataService, DataService>();
         services.AddScoped<IValidationService, ValidationService>();
-
+        
+        // Register the worker
         services.AddHostedService<Worker>();
     })
     .ConfigureLogging((context, logging) =>

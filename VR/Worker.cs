@@ -2,11 +2,19 @@ using VR.Interfaces;
 
 namespace VR
 {
+    /// <summary>
+    /// Background service that monitors files using the file monitor service.
+    /// </summary>
     public class Worker : BackgroundService
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<Worker> _logger;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Worker"/> class.
+        /// </summary>
+        /// <param name="serviceProvider">The service provider.</param>
+        /// <param name="logger">The logger instance.</param>
         public Worker(IServiceProvider serviceProvider, ILogger<Worker> logger)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));

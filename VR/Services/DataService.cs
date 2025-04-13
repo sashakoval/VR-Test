@@ -5,12 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace VR.Services
 {
+    /// <summary>
+    /// Service to handle data operations related to boxes.
+    /// </summary>
     public class DataService : IDataService
     {
         private readonly VRDbContext _dbContext;
         private readonly ILogger<DataService> _logger;
         private const int DefaultBatchSize = 1000;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataService"/> class.
+        /// </summary>
+        /// <param name="dbContext">The database context.</param>
+        /// <param name="logger">The logger instance.</param>
         public DataService(VRDbContext dbContext, ILogger<DataService> logger)
         {
             _dbContext = dbContext;
@@ -63,5 +71,3 @@ namespace VR.Services
         }
     }
 }
-
-

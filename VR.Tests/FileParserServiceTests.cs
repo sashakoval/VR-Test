@@ -3,13 +3,12 @@ using VR.Models;
 using VR.Services;
 using Microsoft.Extensions.Logging;
 using VR.Interfaces;
-using Xunit;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace VR.Tests.Services
 {
+    /// <summary>
+    /// Unit tests for the FileMonitorService class.
+    /// </summary>
     public class FileParserServiceTests
     {
         private readonly Mock<ILogger<FileParserService>> _loggerMock;

@@ -4,6 +4,9 @@ using VR.Configurations;
 
 namespace VR.Services
 {
+    /// <summary>
+    /// Service to monitor a specified folder for new or changed text files and process them.
+    /// </summary>
     public class FileMonitorService : IFileMonitorService
     {
         private readonly ILogger<FileMonitorService> _logger;
@@ -12,6 +15,13 @@ namespace VR.Services
         private readonly FileMonitorOptions _options;
         private FileSystemWatcher? _fileSystemWatcher;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileMonitorService"/> class.
+        /// </summary>
+        /// <param name="options">The options for file monitoring.</param>
+        /// <param name="logger">The logger instance.</param>
+        /// <param name="fileParserService">The file parser service.</param>
+        /// <param name="dataService">The data service.</param>
         public FileMonitorService(IOptions<FileMonitorOptions> options, ILogger<FileMonitorService> logger, IFileParserService fileParserService, IDataService dataService)
         {
             _logger = logger;
@@ -20,6 +30,9 @@ namespace VR.Services
             _dataService = dataService;
         }
 
+        /// <summary>
+        /// Starts watching the specified folder for new or changed text files.
+        /// </summary>
         public void StartWatching()
         {
             ProcessExistingFiles();
@@ -36,6 +49,10 @@ namespace VR.Services
             _logger.LogInformation("Started watching folder: {folder}", _options.WatchFolder);
         }
 
+        /// <summary>
+        /// Processes a specified file asynchronously.
+        /// </summary>
+        /// <param name="filePath">The path of the file to process.</param>
         public async Task ProcessFileAsync(string filePath)
         {
             _logger.LogInformation("Processing file: {filePath}", filePath);
@@ -56,6 +73,9 @@ namespace VR.Services
             }
         }
 
+        /// <summary>
+        /// Processes existing files in the watch folder.
+        /// </summary>
         private async void ProcessExistingFiles()
         {
             var existingFiles = Directory.GetFiles(_options.WatchFolder, "*.txt");
@@ -66,12 +86,22 @@ namespace VR.Services
             }
         }
 
+        /// <summary>
+        /// Event handler for when a new file is created in the watch folder.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private async void OnCreated(object sender, FileSystemEventArgs e)
         {
             _logger.LogInformation("File created: {filePath}", e.FullPath);
             await ProcessFileAsync(e.FullPath);
         }
 
+        /// <summary>
+        /// Event handler for when a file is changed in the watch folder.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The event data.</param>
         private async void OnChanged(object sender, FileSystemEventArgs e)
         {
             _logger.LogInformation("File changed: {filePath}", e.FullPath);
@@ -79,4 +109,3 @@ namespace VR.Services
         }
     }
 }
-

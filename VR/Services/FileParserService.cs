@@ -3,11 +3,19 @@ using VR.Models;
 
 namespace VR.Services
 {
+    /// <summary>
+    /// Service to parse files and process valid boxes in batches.
+    /// </summary>
     public class FileParserService : IFileParserService
     {
         private readonly ILogger<FileParserService> _logger;
         private readonly IValidationService _validationService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileParserService"/> class.
+        /// </summary>
+        /// <param name="logger">The logger instance.</param>
+        /// <param name="validationService">The validation service.</param>
         public FileParserService(ILogger<FileParserService> logger, IValidationService validationService)
         {
             _logger = logger;
@@ -225,4 +233,3 @@ namespace VR.Services
         }
     }
 }
-
