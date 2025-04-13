@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR", "VR\VR.csproj", "{02123378-2A60-4A6A-B881-50C2FF27247C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR.Tests", "VR.Tests\VR.Tests.csproj", "{B76CEDAD-0F3A-413F-83D1-DDC33774315D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02123378-2A60-4A6A-B881-50C2FF27247C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02123378-2A60-4A6A-B881-50C2FF27247C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02123378-2A60-4A6A-B881-50C2FF27247C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02123378-2A60-4A6A-B881-50C2FF27247C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B76CEDAD-0F3A-413F-83D1-DDC33774315D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B76CEDAD-0F3A-413F-83D1-DDC33774315D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B76CEDAD-0F3A-413F-83D1-DDC33774315D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B76CEDAD-0F3A-413F-83D1-DDC33774315D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
