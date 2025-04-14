@@ -24,11 +24,11 @@ cd VR-TEST
    
 ```bash
 {
-  "ConnectionStrings": {
-    "PostgreSQLConnectionStrings": "Host=your_host;Database=your_db;Username=your_user;Password=your_password"
-  },
   "FileMonitorOptions": {
-    "DirectoryPath": "path_to_monitor"
+    "WatchFolder": "../Infrastructure/ASNStorage"
+  },
+  "ConnectionStrings": {
+    "PostgreSQLConnectionStrings": "Host=localhost;Database=VR;Username=postgres;Password=1234"
   }
 }
 ```
