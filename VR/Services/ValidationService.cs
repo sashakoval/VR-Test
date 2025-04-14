@@ -51,12 +51,7 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Checks if the given ISBN-13 is valid.
-        /// </summary>
-        /// <param name="isbn">The ISBN-13 to check.</param>
-        /// <returns>True if the ISBN-13 is valid, otherwise false.</returns>
-        public bool IsValidIsbn13(string isbn)
+        private bool IsValidIsbn13(string isbn)
         {
             if (string.IsNullOrWhiteSpace(isbn))
             {
@@ -74,12 +69,7 @@ namespace VR.Services
             return sum % 10 == 0;
         }
 
-        /// <summary>
-        /// Checks if the given PO number is valid.
-        /// </summary>
-        /// <param name="poNumber">The PO number to check.</param>
-        /// <returns>True if the PO number is valid, otherwise false.</returns>
-        public bool IsValidPoNumber(string poNumber)
+        private bool IsValidPoNumber(string poNumber)
         {
             return !string.IsNullOrWhiteSpace(poNumber) && char.IsLetter(poNumber[0]);
         }

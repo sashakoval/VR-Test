@@ -37,6 +37,10 @@ namespace VR.Services
                 throw new ArgumentException("Batch size must be greater than zero.", nameof(batchSize));
             }
 
+            var existingBoxIdentifiers = await _dbContext.Boxes
+                .Select(b => b.Identifier)
+                .ToDictionaryAsync(id => id);
+
             int savedCount = 0;
 
             for (int i = 0; i < boxes.Count; i += batchSize)
@@ -44,30 +48,16 @@ namespace VR.Services
                 var batch = boxes.GetRange(i, Math.Min(batchSize, boxes.Count - i));
                 foreach (var box in batch)
                 {
-                    if (!await BoxExistsAsync(box.Identifier))
+                    if (!existingBoxIdentifiers.ContainsKey(box.Identifier))
                     {
                         await _dbContext.Boxes.AddAsync(box);
                         savedCount++;
                     }
-                    else
-                    {
-                        _logger.LogWarning("Box with identifier {identifier} already exists in the database", box.Identifier);
-                    }
-                    await _dbContext.SaveChangesAsync();
                 }
 
+                await _dbContext.SaveChangesAsync();
                 _logger.LogInformation("Saved {count} boxes to database", savedCount);
             }
-        }
-
-        /// <summary>
-        /// Checks if a box with the specified identifier exists in the database.
-        /// </summary>
-        /// <param name="identifier">The identifier of the box to check.</param>
-        /// <returns>True if the box exists, otherwise false.</returns>
-        public async Task<bool> BoxExistsAsync(string identifier)
-        {
-            return await _dbContext.Boxes.AnyAsync(b => b.Identifier == identifier);
         }
     }
 }

@@ -76,16 +76,6 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Handles the header line of the file.
-        /// </summary>
-        /// <param name="parts">The parts of the header line.</param>
-        /// <param name="currentBox">The current box being processed.</param>
-        /// <param name="validBoxes">The list of valid boxes.</param>
-        /// <param name="invalidBoxes">The dictionary of invalid boxes and their invalid lines.</param>
-        /// <param name="processBatchAsync">The function to process a batch of valid boxes.</param>
-        /// <param name="batchSize">The size of each batch to be processed.</param>
-        /// <returns>The updated current box.</returns>
         private async Task<Box?> HandleHeaderAsync(string[] parts, Box? currentBox, List<Box> validBoxes, Dictionary<string, List<string>> invalidBoxes, Func<List<Box>, Task> processBatchAsync, int batchSize)
         {
             if (currentBox != null)
@@ -118,12 +108,6 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Handles the line of the file.
-        /// </summary>
-        /// <param name="parts">The parts of the line.</param>
-        /// <param name="currentBox">The current box being processed.</param>
-        /// <param name="invalidBoxes">The dictionary of invalid boxes and their invalid lines.</param>
         private void HandleLine(string[] parts, Box? currentBox, Dictionary<string, List<string>> invalidBoxes)
         {
             try
@@ -145,12 +129,6 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Adds the current box to the appropriate list (valid or invalid).
-        /// </summary>
-        /// <param name="currentBox">The current box being processed.</param>
-        /// <param name="validBoxes">The list of valid boxes.</param>
-        /// <param name="invalidBoxes">The dictionary of invalid boxes and their invalid lines.</param>
         private void AddCurrentBoxToAppropriateList(Box? currentBox, List<Box> validBoxes, Dictionary<string, List<string>> invalidBoxes)
         {
             if (currentBox != null)
@@ -169,10 +147,6 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Logs the invalid boxes and their invalid lines.
-        /// </summary>
-        /// <param name="invalidBoxes">The dictionary of invalid boxes and their invalid lines.</param>
         private void LogInvalidBoxes(Dictionary<string, List<string>> invalidBoxes)
         {
             if (invalidBoxes.Count > 0)
@@ -189,11 +163,6 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Processes the header line and creates a new Box object.
-        /// </summary>
-        /// <param name="parts">The parts of the header line.</param>
-        /// <returns>A new Box object.</returns>
         private Box ProcessHeader(string[] parts)
         {
             return new Box
@@ -204,11 +173,6 @@ namespace VR.Services
             };
         }
 
-        /// <summary>
-        /// Processes the line and adds the content to the current box.
-        /// </summary>
-        /// <param name="parts">The parts of the line.</param>
-        /// <param name="currentBox">The current box being processed.</param>
         private void ProcessLine(string[] parts, Box? currentBox)
         {
             var content = new Box.Content

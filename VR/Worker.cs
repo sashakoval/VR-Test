@@ -48,11 +48,6 @@ namespace VR
             }
         }
 
-        /// <summary>
-        /// Monitors files in the background.
-        /// </summary>
-        /// <param name="fileMonitorService">The file monitor service.</param>
-        /// <param name="stoppingToken">A token that can be used to stop the background service.</param>
         private async Task MonitorFilesAsync(IFileMonitorService fileMonitorService, CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)

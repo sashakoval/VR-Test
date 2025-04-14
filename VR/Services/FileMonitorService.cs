@@ -73,35 +73,21 @@ namespace VR.Services
             }
         }
 
-        /// <summary>
-        /// Processes existing files in the watch folder.
-        /// </summary>
         private async void ProcessExistingFiles()
         {
             var existingFiles = Directory.GetFiles(_options.WatchFolder, "*.txt");
             foreach (var file in existingFiles)
             {
-                _logger.LogInformation("Processing existing file: {filePath}", file);
                 await ProcessFileAsync(file);
             }
         }
 
-        /// <summary>
-        /// Event handler for when a new file is created in the watch folder.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The event data.</param>
         private async void OnCreated(object sender, FileSystemEventArgs e)
         {
             _logger.LogInformation("File created: {filePath}", e.FullPath);
             await ProcessFileAsync(e.FullPath);
         }
 
-        /// <summary>
-        /// Event handler for when a file is changed in the watch folder.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The event data.</param>
         private async void OnChanged(object sender, FileSystemEventArgs e)
         {
             _logger.LogInformation("File changed: {filePath}", e.FullPath);
