@@ -1,10 +1,10 @@
 using Moq;
-using VR.Models;
-using VR.Services;
 using Microsoft.Extensions.Logging;
-using VR.Interfaces;
+using Infrastructure.Services;
+using Core.Interfaces;
+using Core.Entities;
 
-namespace VR.Tests.Services
+namespace Infrastructure.Tests
 {
     /// <summary>
     /// Unit tests for the FileMonitorService class.

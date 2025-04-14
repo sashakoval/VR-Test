@@ -1,7 +1,8 @@
-﻿using VR.Interfaces;
-using VR.Models;
+﻿using Core.Entities;
+using Core.Interfaces;
+using Microsoft.Extensions.Logging;
 
-namespace VR.Services
+namespace Infrastructure.Services
 {
     /// <summary>
     /// Service to parse files and process valid boxes in batches.
@@ -10,6 +11,7 @@ namespace VR.Services
     {
         private readonly ILogger<FileParserService> _logger;
         private readonly IValidationService _validationService;
+        private readonly int _batchSize = 5000;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileParserService"/> class.
@@ -23,16 +25,17 @@ namespace VR.Services
         }
 
         /// <summary>
-        /// Parses the file and processes valid boxes in batches.
+        /// Parses the file and processes valid boxes in batches as they are encountered.
         /// </summary>
         /// <param name="filePath">The path to the file to be parsed.</param>
         /// <param name="processBatchAsync">The function to process a batch of valid boxes.</param>
         /// <param name="batchSize">The size of each batch to be processed.</param>
-        public async Task ParseFileAsync(string filePath, Func<List<Box>, Task> processBatchAsync, int batchSize = 1000)
+        public async Task ParseFileAsync(string filePath, Func<List<Box>, Task> processBatchAsync)
         {
-            var validBoxes = new List<Box>();
+            var validBoxesBatch = new List<Box>();
             var invalidBoxes = new Dictionary<string, List<string>>();
             Box? currentBox = null;
+            int processedBoxesCount = 0;
 
             try
             {
@@ -52,7 +55,18 @@ namespace VR.Services
 
                     if (parts[0] == "HDR")
                     {
-                        currentBox = await HandleHeaderAsync(parts, currentBox, validBoxes, invalidBoxes, processBatchAsync, batchSize);
+                        if (currentBox != null)
+                        {
+                            AddCurrentBoxToBatch(currentBox, validBoxesBatch, invalidBoxes);
+                            processedBoxesCount++;
+
+                            if (validBoxesBatch.Count >= _batchSize)
+                            {
+                                await processBatchAsync(validBoxesBatch);
+                                validBoxesBatch.Clear();
+                            }
+                        }
+                        currentBox = HandleHeader(parts);
                     }
                     else if (parts[0] == "LINE")
                     {
@@ -60,14 +74,19 @@ namespace VR.Services
                     }
                 }
 
-                AddCurrentBoxToAppropriateList(currentBox, validBoxes, invalidBoxes);
-
-                if (validBoxes.Count > 0)
+                if (currentBox != null)
                 {
-                    await processBatchAsync(validBoxes);
+                    AddCurrentBoxToBatch(currentBox, validBoxesBatch, invalidBoxes);
+                    processedBoxesCount++;
+                }
+
+                if (validBoxesBatch.Count > 0)
+                {
+                    await processBatchAsync(validBoxesBatch);
                 }
 
                 LogInvalidBoxes(invalidBoxes);
+                _logger.LogInformation($"Processed a total of {processedBoxesCount} boxes from file: {filePath}");
             }
             catch (Exception ex)
             {
@@ -76,19 +95,16 @@ namespace VR.Services
             }
         }
 
-        private async Task<Box?> HandleHeaderAsync(string[] parts, Box? currentBox, List<Box> validBoxes, Dictionary<string, List<string>> invalidBoxes, Func<List<Box>, Task> processBatchAsync, int batchSize)
+        private void AddCurrentBoxToBatch(Box? currentBox, List<Box> validBoxesBatch, Dictionary<string, List<string>> invalidBoxes)
         {
-            if (currentBox != null)
+            if (currentBox != null && !invalidBoxes.ContainsKey(currentBox.Identifier))
             {
-                AddCurrentBoxToAppropriateList(currentBox, validBoxes, invalidBoxes);
-
-                if (validBoxes.Count >= batchSize)
-                {
-                    await processBatchAsync(validBoxes);
-                    validBoxes.Clear();
-                }
+                validBoxesBatch.Add(currentBox);
             }
+        }
 
+        private Box? HandleHeader(string[] parts)
+        {
             try
             {
                 _validationService.ValidateHeader(parts);
@@ -97,13 +113,6 @@ namespace VR.Services
             catch (FormatException ex)
             {
                 _logger.LogError(ex, "Validation error in header: {header}", string.Join(' ', parts));
-                if (currentBox != null)
-                {
-                    if (!invalidBoxes.ContainsKey(currentBox.Identifier))
-                    {
-                        invalidBoxes[currentBox.Identifier] = new List<string>();
-                    }
-                }
                 return null;
             }
         }
@@ -125,24 +134,6 @@ namespace VR.Services
                         invalidBoxes[currentBox.Identifier] = new List<string>();
                     }
                     invalidBoxes[currentBox.Identifier].Add(string.Join(' ', parts));
-                }
-            }
-        }
-
-        private void AddCurrentBoxToAppropriateList(Box? currentBox, List<Box> validBoxes, Dictionary<string, List<string>> invalidBoxes)
-        {
-            if (currentBox != null)
-            {
-                if (!invalidBoxes.ContainsKey(currentBox.Identifier))
-                {
-                    validBoxes.Add(currentBox);
-                }
-                else
-                {
-                    if (!invalidBoxes.ContainsKey(currentBox.Identifier))
-                    {
-                        invalidBoxes[currentBox.Identifier] = new List<string>();
-                    }
                 }
             }
         }

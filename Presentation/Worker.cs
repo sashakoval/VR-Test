@@ -1,6 +1,6 @@
 using Core.Interfaces;
 
-namespace WorkerService
+namespace Presentation
 {
     /// <summary>
     /// Background service that monitors files using the file monitor service.

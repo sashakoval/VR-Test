@@ -1,8 +1,8 @@
-﻿using VR.Interfaces;
+﻿using Core.Interfaces;
 using Microsoft.Extensions.Options;
-using VR.Configurations;
+using Infrastructure.Configurations;
 
-namespace VR.Services
+namespace Application.Services
 {
     /// <summary>
     /// Service to monitor a specified folder for new or changed text files and process them.

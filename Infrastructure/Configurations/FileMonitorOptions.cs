@@ -1,4 +1,4 @@
-﻿namespace VR.Configurations
+﻿namespace Infrastructure.Configurations
 {
     /// <summary>
     /// Options for file monitoring.

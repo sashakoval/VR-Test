@@ -1,6 +1,6 @@
-﻿using VR.Models;
+﻿using Core.Entities;
 
-namespace VR.Interfaces
+namespace Core.Interfaces
 {
     /// <summary>
     /// Interface for file parser services.
@@ -12,7 +12,6 @@ namespace VR.Interfaces
         /// </summary>
         /// <param name="filePath">The path to the file to be parsed.</param>
         /// <param name="processBatchAsync">The function to process a batch of valid boxes.</param>
-        /// <param name="batchSize">The size of each batch to be processed.</param>
-        Task ParseFileAsync(string filePath, Func<List<Box>, Task> processBatchAsync, int batchSize = 1000);
+        Task ParseFileAsync(string filePath, Func<List<Box>, Task> processBatchAsync);
     }
 }

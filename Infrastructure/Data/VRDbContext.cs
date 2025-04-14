@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using VR.Models;
+﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace VR.Data
+namespace Infrastructure.Data
 {
     /// <summary>
     /// Database context for the VR application.

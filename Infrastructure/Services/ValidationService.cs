@@ -1,6 +1,6 @@
-﻿using VR.Interfaces;
+﻿using Core.Interfaces;
 
-namespace VR.Services
+namespace Infrastructure.Services
 {
     /// <summary>
     /// Service to validate the contents of the file being parsed.

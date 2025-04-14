@@ -1,6 +1,6 @@
-﻿using VR.Models;
+﻿using Core.Entities;
 
-namespace VR.Interfaces
+namespace Core.Interfaces
 {
     /// <summary>
     /// Interface for data services.
@@ -12,6 +12,6 @@ namespace VR.Interfaces
         /// </summary>
         /// <param name="boxes">The list of boxes to be saved.</param>
         /// <param name="batchSize">The size of each batch to be saved.</param>
-        Task SaveBoxesAsync(List<Box> boxes, int batchSize);
+        Task SaveBoxesAsync(List<Box> boxes);
     }
 }

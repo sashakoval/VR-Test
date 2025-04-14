@@ -1,4 +1,4 @@
-﻿namespace VR.Models
+﻿namespace Core.Entities
 {
     /// <summary>
     /// Represents a box containing contents.

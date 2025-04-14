@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR", "VR\VR.csproj", "{02123378-2A60-4A6A-B881-50C2FF27247C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerService", "VR\WorkerService.csproj", "{02123378-2A60-4A6A-B881-50C2FF27247C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VR.Tests", "VR.Tests\VR.Tests.csproj", "{B76CEDAD-0F3A-413F-83D1-DDC33774315D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "VR.Tests\Infrastructure.Tests.csproj", "{B76CEDAD-0F3A-413F-83D1-DDC33774315D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGenerator", "DataGenerator\DataGenerator.csproj", "{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{60903E20-1351-45FD-8592-3D694EAF29E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4780F5B3-D23F-4466-836A-AB0EA145C858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9960EB28-4005-4E6E-8A6C-EFB2DD01AEC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60903E20-1351-45FD-8592-3D694EAF29E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60903E20-1351-45FD-8592-3D694EAF29E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60903E20-1351-45FD-8592-3D694EAF29E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60903E20-1351-45FD-8592-3D694EAF29E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4780F5B3-D23F-4466-836A-AB0EA145C858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4780F5B3-D23F-4466-836A-AB0EA145C858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4780F5B3-D23F-4466-836A-AB0EA145C858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4780F5B3-D23F-4466-836A-AB0EA145C858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,7 +10,7 @@ class Program
         string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "generated_data");
         Directory.CreateDirectory(directoryPath);
         string filePath = Path.Combine(directoryPath, "datafile.txt");
-        int numberOfBoxes = 1050;
+        int numberOfBoxes = 100500;
         var random = new Random();
 
         using (var writer = new StreamWriter(filePath, false, Encoding.UTF8))

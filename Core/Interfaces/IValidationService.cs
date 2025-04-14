@@ -1,4 +1,4 @@
-﻿namespace VR.Interfaces
+﻿namespace Core.Interfaces
 {
     /// <summary>
     /// Interface for validation services.
