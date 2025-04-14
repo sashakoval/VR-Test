@@ -29,22 +29,11 @@ namespace WorkerService
         {
             _logger.LogInformation("Watching Process has been started");
 
-            try
+            using (var scope = _serviceProvider.CreateScope())
             {
-                using (var scope = _serviceProvider.CreateScope())
-                {
-                    var fileMonitorService = scope.ServiceProvider.GetRequiredService<IFileMonitorService>();
-                    fileMonitorService.StartWatching();
-                    await MonitorFilesAsync(fileMonitorService, stoppingToken);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "An error occurred while executing the worker.");
-            }
-            finally
-            {
-                _logger.LogInformation("Watching Process has been stopped");
+                var fileMonitorService = scope.ServiceProvider.GetRequiredService<IFileMonitorService>();
+                fileMonitorService.StartWatching();
+                await MonitorFilesAsync(fileMonitorService, stoppingToken);
             }
         }
 
